@@ -1,6 +1,7 @@
 # flutter_phone_authentication
 
 A new Flutter application.
+![phoneauth](https://user-images.githubusercontent.com/16588377/73056872-15dd0e00-3eb6-11ea-9873-a97b30024cb9.png)
 
 ## Getting Started
 
