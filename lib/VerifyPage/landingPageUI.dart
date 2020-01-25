@@ -33,19 +33,19 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           height: 50,
         ),
         Text(
-          ChatApp.signInText,
+          PhoneApp.signInText,
           style: TextStyle(
               color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold),
         ),
         Text(
-          ChatApp.enterPhoneNumber,
+          PhoneApp.enterPhoneNumber,
           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: 10,
         ),
         Text(
-          ChatApp.sendSMS,
+          PhoneApp.sendSMS,
           textAlign: TextAlign.center,
         ),
         Container(
@@ -106,13 +106,13 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           ),
         ),
         Text(
-          ChatApp.tapButton,
+          PhoneApp.tapButton,
           textAlign: TextAlign.center,
         ),
         Container(
           margin: EdgeInsets.only(top: 50),
           child: RedButton(
-              title: ChatApp.next,
+              title: PhoneApp.next,
               screenWidth: _screenWidth * 0.9,
               onTap: _verifyPhoneNumber),
         ),
@@ -121,7 +121,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           alignment: Alignment.bottomCenter,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(ChatApp.version),
+            child: Text(PhoneApp.version),
           ),
         ),
       ],
@@ -156,10 +156,10 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           (AuthCredential phoneAuthCredential) async {
         print("h");
         final FirebaseUser user =
-            (await ChatApp.auth.signInWithCredential(phoneAuthCredential)).user;
+            (await PhoneApp.auth.signInWithCredential(phoneAuthCredential)).user;
 
         //(await ChatApp.auth.signInWithCredential(credential)).user;
-        final FirebaseUser currentUser = await ChatApp.auth.currentUser();
+        final FirebaseUser currentUser = await PhoneApp.auth.currentUser();
         assert(user.uid == currentUser.uid);
 
           if (user != null) {
@@ -167,16 +167,16 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
             //TODO
             print(_message);
             print("Landing");
-            await ChatApp.sharedPreferences
-                .setString(ChatApp.userUID, user.uid);
-            await ChatApp.sharedPreferences.setString(ChatApp.userPhoneNumber,
+            await PhoneApp.sharedPreferences
+                .setString(PhoneApp.userUID, user.uid);
+            await PhoneApp.sharedPreferences.setString(PhoneApp.userPhoneNumber,
                 "+${_countryTextController.text + _phoneTextController.text}");
-            ChatApp.firestore
-                .collection(ChatApp.collectionUser)
+            PhoneApp.firestore
+                .collection(PhoneApp.collectionUser)
                 .document(user.uid)
                 .setData({
-              ChatApp.userUID: user.uid,
-              ChatApp.userPhoneNumber: '+${_countryTextController.text + _phoneTextController.text}'
+              PhoneApp.userUID: user.uid,
+              PhoneApp.userPhoneNumber: '+${_countryTextController.text + _phoneTextController.text}'
             }).then((_){
               Navigator.pop(context);
               Navigator.push(context,
@@ -214,7 +214,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           (String verificationId, [int forceResendingToken]) async {
         print("g");
         _verificationId = verificationId;
-        await ChatApp.sharedPreferences.setString(ChatApp.userPhoneNumber,
+        await PhoneApp.sharedPreferences.setString(PhoneApp.userPhoneNumber,
             "+${_countryTextController.text + _phoneTextController.text}");
         Navigator.pop(context);
         Navigator.push(context,
@@ -226,7 +226,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         _verificationId = verificationId;
       };
       print(_countryTextController.text + _phoneTextController.text);
-      await ChatApp.auth.verifyPhoneNumber(
+      await PhoneApp.auth.verifyPhoneNumber(
           phoneNumber:
               "+${_countryTextController.text}${_phoneTextController.text}",
           timeout: const Duration(seconds: 5),

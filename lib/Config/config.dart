@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ChatApp{
+class PhoneApp{
   static SharedPreferences sharedPreferences;
   static FirebaseUser user;
   static FirebaseAuth auth;
@@ -13,7 +13,7 @@ class ChatApp{
   static String collectionMessage = "messages";
 
 
-  // App Info
+  // App Info3
   static String version = 'Version 1.0.0';
   //Strings
   static String signInText = "Sign in using Phone Number";
@@ -25,14 +25,6 @@ class ChatApp{
   static String sendSMS  = "We will send an SMS message to verify your phone number.";
   static String enterName  = "Enter your name";
   static String done  = "Done";
-//  static String enterPhoneNumber  = "Enter your phone number";
-//  static String enterPhoneNumber  = "Enter your phone number";
-//  static String enterPhoneNumber  = "Enter your phone number";
-//  static String enterPhoneNumber  = "Enter your phone number";
-//  static String enterPhoneNumber  = "Enter your phone number";
-//  static String enterPhoneNumber  = "Enter your phone number";
-
-
 
  // User Detail
   static final String userName = 'name';

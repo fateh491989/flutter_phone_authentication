@@ -8,9 +8,9 @@ import 'Config/config.dart';
 
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
-   ChatApp.sharedPreferences = await SharedPreferences.getInstance();
-   ChatApp.auth = FirebaseAuth.instance;
-   ChatApp.firestore = Firestore.instance;
+   PhoneApp.sharedPreferences = await SharedPreferences.getInstance();
+   PhoneApp.auth = FirebaseAuth.instance;
+   PhoneApp.firestore = Firestore.instance;
    runApp(MyApp());
 }
 

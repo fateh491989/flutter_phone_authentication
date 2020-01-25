@@ -16,7 +16,7 @@ class _LandingPageState extends State<LandingPage> {
 
   }
   readLocal() async {
-    if(await ChatApp.auth.currentUser()!= null){
+    if(await PhoneApp.auth.currentUser()!= null){
       Route route = MaterialPageRoute(
           builder: (builder) => PersonalInfo());
       Navigator.push(context, route);

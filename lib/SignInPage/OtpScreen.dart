@@ -31,7 +31,7 @@ class _OtpScreenState extends State<OtpScreen> {
             height: 50,
           ),
           Text(
-            "Verify ${ChatApp.sharedPreferences.getString(ChatApp.userPhoneNumber)}",
+            "Verify ${PhoneApp.sharedPreferences.getString(PhoneApp.userPhoneNumber)}",
             style: TextStyle(
                 color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold),
           ),
@@ -50,7 +50,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     children: [
                       TextSpan(
                         text:
-                            "Verify ${ChatApp.sharedPreferences.getString(ChatApp.userPhoneNumber)}",
+                            "Verify ${PhoneApp.sharedPreferences.getString(PhoneApp.userPhoneNumber)}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black),
                       )
@@ -79,7 +79,7 @@ class _OtpScreenState extends State<OtpScreen> {
           Container(
             margin: EdgeInsets.only(top: 50),
             child: RedButton(
-              title: ChatApp.signIn,
+              title: PhoneApp.signIn,
               screenWidth: _screenWidth * 0.9,
               onTap: _signInWithPhoneNumber,
             ),
@@ -110,22 +110,22 @@ class _OtpScreenState extends State<OtpScreen> {
       smsCode: _smsController.text,
     );
     FirebaseUser user;
-    await ChatApp.auth.signInWithCredential(credential).then((u) async {
+    await PhoneApp.auth.signInWithCredential(credential).then((u) async {
       user = u.user;
-      final FirebaseUser currentUser = await ChatApp.auth.currentUser();
+      final FirebaseUser currentUser = await PhoneApp.auth.currentUser();
       assert(user.uid == currentUser.uid);
       if (user != null) {
         _message = 'Successfully signed in, uid: ' + user.uid;
         //TODO
         print(_message);
         // Writing data  to database
-        ChatApp.firestore
-            .collection(ChatApp.collectionUser)
+        PhoneApp.firestore
+            .collection(PhoneApp.collectionUser)
             .document(user.uid)
             .setData({
-          ChatApp.userUID: user.uid,
-          ChatApp.userPhoneNumber:
-              ChatApp.sharedPreferences.getString(ChatApp.userPhoneNumber),
+          PhoneApp.userUID: user.uid,
+          PhoneApp.userPhoneNumber:
+              PhoneApp.sharedPreferences.getString(PhoneApp.userPhoneNumber),
         });
         Navigator.push(
             context, MaterialPageRoute(builder: (builder) => PersonalInfo()));

@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_authentication/Config/config.dart';
+import 'package:flutter_phone_authentication/VerifyPage/landingPage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../Dialogs/errorDialog.dart';
@@ -23,15 +25,33 @@ class PersonalInfoScreen extends StatefulWidget {
 }
 
 class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: Text('Signed in'),
-        )
-      ),
+          body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+                'Signed in ${PhoneApp.sharedPreferences.getString(PhoneApp.userPhoneNumber)}'),
+            RaisedButton(
+              onPressed: _signOut,
+              child: Text('Signout'),
+            )
+          ],
+        ),
+      )),
     );
+  }
+
+  void _signOut() {
+    PhoneApp.auth.signOut().then((_) {
+      print('Signed Out Successfully');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (builder) => LandingPage()));
+    });
   }
 }
